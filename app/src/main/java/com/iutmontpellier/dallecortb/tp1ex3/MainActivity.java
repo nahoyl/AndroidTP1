@@ -3,6 +3,7 @@ package com.iutmontpellier.dallecortb.tp1ex3;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,11 +15,14 @@ import java.util.EventListener;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
+    public static final String NOM = "nom";
+    public static final String PRENOM = "prenom";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        View boutonValider = findViewById(R.id.buttonValider);
+        View boutonValider = findViewById(R.id.boutonValider);
         boutonValider.setOnClickListener(this);
     }
 
@@ -55,13 +59,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         if ( !bLeChampNomEstVide && !bLeChampPrenomEstVide){
             afficherNomEtPrenom(nomString, prenomString);
+        }else{
+            afficherUnMessageDAlerte();
         }
+    }
+
+    private void afficherUnMessageDAlerte() {
+        TextView info = (TextView)findViewById(R.id.infoText);
+        info.setText(R.string.erreurChampsNomOuPrenomVides);
+        info.setTextColor(Color.RED);
     }
 
     private void afficherNomEtPrenom(String nomString, String prenomString) {
         Intent intent = new Intent(this, AffichageNomPrenom.class);
-        intent.putExtra("nom", nomString);
-        intent.putExtra("prenom", prenomString);
+        intent.putExtra(NOM, nomString);
+        intent.putExtra(PRENOM, prenomString);
         startActivity(intent);
     }
 }

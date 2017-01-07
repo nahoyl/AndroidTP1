@@ -4,4 +4,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_affichage_nom_prenom">AffichageNomPrenom</string>
+    <string name="erreurChampsNomOuPrenomVides">Merci de remplir les deux champs avant de valider.</string>
 </resources>

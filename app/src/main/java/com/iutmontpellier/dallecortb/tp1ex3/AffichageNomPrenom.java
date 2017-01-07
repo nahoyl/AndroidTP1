@@ -22,11 +22,11 @@ public class AffichageNomPrenom extends Activity {
     private void remplirLesDonnees() {
         Intent intent       = getIntent();
 
-        String prenomString = intent.getStringExtra("prenom");
+        String prenomString = intent.getStringExtra(MainActivity.PRENOM);
         TextView prenomView = (TextView)findViewById(R.id.textViewPrenom);
         prenomView.setText(prenomString);
 
-        String nomString = intent.getStringExtra("nom");
+        String nomString = intent.getStringExtra(MainActivity.NOM);
         TextView nomView = (TextView)findViewById(R.id.textViewNom);
         nomView.setText(nomString);
     }
