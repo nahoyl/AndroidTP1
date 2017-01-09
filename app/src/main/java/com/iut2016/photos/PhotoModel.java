@@ -1,10 +1,12 @@
-package com.iutmontpellier.dallecortb.tp1ex3;
+package com.iut2016.photos;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.nfc.Tag;
 import android.util.Log;
+
+import com.iutmontpellier.dallecortb.tp1ex3.MainActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +25,8 @@ public class PhotoModel {
 
     PhotoModel(String photoName){
         name = photoName;
+        thumbBitmap = null;
+        largeBitmap = null;
     }
 
     public String getName() {
@@ -68,13 +72,13 @@ public class PhotoModel {
     }
 
     public Bitmap getThumbBitmap(){
-        if (thumbBitmap != null){
+        if (thumbBitmap == null){
             thumbBitmap = getBitmap(80);
         }
         return thumbBitmap;
     }
     public Bitmap getFullscreenBitmap() {
-        if (largeBitmap != null){
+        if (largeBitmap == null){
             largeBitmap = getBitmap(500);
         }
         return largeBitmap;

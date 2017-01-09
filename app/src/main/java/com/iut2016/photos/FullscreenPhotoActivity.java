@@ -1,4 +1,4 @@
-package com.iutmontpellier.dallecortb.tp1ex3;
+package com.iut2016.photos;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -7,13 +7,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.iut2016.photos.PhotoModel;
+import com.iutmontpellier.dallecortb.tp1ex3.R;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class FullscreenPictureActivity extends Activity {
+public class FullscreenPhotoActivity extends Activity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -94,8 +98,11 @@ public class FullscreenPictureActivity extends Activity {
         mContentView    = findViewById(R.id.fullscreen_content);
 
 
-        int imageNum = getIntent().getIntExtra("imageNum", 0);
+        String photoName = getIntent().getStringExtra("photoName");
         ImageView imageView = new ImageView(this);
+        PhotoModel photo = new PhotoModel(photoName);
+        imageView.setImageBitmap(photo.getFullscreenBitmap());
+        ((ViewGroup)mContentView).addView(imageView);
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {

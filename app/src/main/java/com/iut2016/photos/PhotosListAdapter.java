@@ -1,9 +1,9 @@
-package com.iutmontpellier.dallecortb.tp1ex3;
+package com.iut2016.photos;
 
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Bitmap;
-import android.view.Gravity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +11,18 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import com.iutmontpellier.dallecortb.tp1ex3.R;
 
 /**
  * Created by dallecortb on 07/01/17.
  */
 
-public class ListViewImagesAdapter implements ListAdapter, AdapterView.OnItemClickListener {
+public class PhotosListAdapter implements ListAdapter, AdapterView.OnItemClickListener {
 
-    private ImageScrollerActivity controller;
+    private PhotosController controller;
 
-    public ListViewImagesAdapter(ImageScrollerActivity imageScrollerActivity) {
-        controller = imageScrollerActivity;
+    public PhotosListAdapter(PhotosController photosController) {
+        controller = photosController;
     }
 
     /**
@@ -143,7 +144,7 @@ public class ListViewImagesAdapter implements ListAdapter, AdapterView.OnItemCli
         View view;
 
         if (convertView == null) {
-            Context context = MainActivity.getContext();
+            Context context =  controller.getContext();
             view = createItemViewByInflater(context, position);
         }else{
             view = convertView;
@@ -172,7 +173,14 @@ public class ListViewImagesAdapter implements ListAdapter, AdapterView.OnItemCli
         ImageView imageView;
         Bitmap bitmapImage;
 
-        imageView = (ImageView)view.findViewById(R.id.fullscreen_content);
+        boolean estUnItemPair = position % 2 == 0;
+        if (estUnItemPair){
+            view.setBackgroundColor(Color.WHITE);
+        }else{
+            view.setBackgroundColor(Color.LTGRAY);
+        }
+
+        imageView = (ImageView)view.findViewById(R.id.image);
         bitmapImage = controller.getThumbBitmap(position);
         imageView.setImageBitmap(bitmapImage);
 
@@ -189,41 +197,9 @@ public class ListViewImagesAdapter implements ListAdapter, AdapterView.OnItemCli
         }
     }
 
-
     private View createItemViewByInflater(Context context, int position) {
         final View view = View.inflate(context, R.layout.photo_item, null);
         return view;
-    }
-
-    private View createItemViewByCode(Context context) {
-
-        ListItemLayout layout;
-        ImageView imageView;
-        TextView textViewPrenom;
-        TextView textViewNom;
-
-        layout = new ListItemLayout(context);
-
-        layout.setGravity(Gravity.CENTER);
-
-        layout.setMinimumHeight(100);
-        imageView = new ImageView(context);
-        imageView.setId(R.id.fullscreen_content);
-
-        layout.addView(imageView);
-
-
-        textViewPrenom = new TextView(context);
-        textViewPrenom.setHeight(50);
-        textViewPrenom.setId(R.id.labelPrenom);
-        layout.addView(textViewPrenom);
-
-        textViewNom = new TextView(context);
-        textViewNom.setHeight(50);
-        textViewNom.setId(R.id.labelNom);
-        layout.addView(textViewNom);
-
-        return layout;
     }
 
     /**

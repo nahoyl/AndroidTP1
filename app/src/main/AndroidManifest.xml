@@ -21,7 +21,7 @@
             android:label="@string/title_activity_affichage_nom_prenom" />
         <activity android:name=".ImageScrollerActivity" />
         <activity
-            android:name=".FullscreenPictureActivity"
+            android:name="com.iut2016.photos.FullscreenPhotoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_fullscreen_picture"
             android:theme="@style/FullscreenTheme"></activity>
