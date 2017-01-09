@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="right">
+
+    <ImageView
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/fullscreen_content"
+        android:layout_width="80dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_toStartOf="@+id/fullscreen_content"
+        android:id="@+id/labelPrenom"
+        android:layout_alignParentStart="false"
+        android:layout_centerHorizontal="false"
+        android:layout_toRightOf="@+id/fullscreen_content"
+        android:padding="5dp"
+        android:gravity="center"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelPrenom"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/labelNom"
+        android:layout_centerVertical="false"
+        android:layout_toLeftOf="@+id/size"
+        android:layout_toRightOf="@+id/fullscreen_content"
+        android:layout_alignParentBottom="false"
+        android:layout_alignBottom="@+id/fullscreen_content"
+        android:gravity="center"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Affichage"
+        android:text="Bienvenue !"
         android:id="@+id/textView6"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -24,12 +24,12 @@
         android:text="NOM"
         android:id="@+id/textViewNom"
         android:layout_below="@+id/textView6"
+        android:layout_alignParentEnd="false"
+        android:layout_margin="10dp"
+        android:padding="10dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="false"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false"
-        android:layout_margin="10dp"
-        android:padding="10dp" />
+        android:layout_alignParentStart="false" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,5 +40,15 @@
         android:layout_below="@+id/textViewNom"
         android:layout_centerHorizontal="true"
         android:padding="10dp" />
+
+    <Button
+        android:text="Afficher galerie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewPrenom"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/boutonAfficherGalerie"
+        android:textSize="24sp"
+        android:padding="20dp" />
 
 </RelativeLayout>

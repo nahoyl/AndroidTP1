@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="my_logo" type="id"/>
+    <item name="labelNom" type="id">labelNom</item>
+    <item name="labelPrenom" type="id">labelPrenom</item>
 </resources>

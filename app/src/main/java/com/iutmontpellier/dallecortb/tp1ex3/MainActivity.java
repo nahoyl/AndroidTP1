@@ -1,6 +1,7 @@
 package com.iutmontpellier.dallecortb.tp1ex3;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,8 +16,10 @@ import java.util.EventListener;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
+
     public static final String NOM = "nom";
     public static final String PRENOM = "prenom";
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         View boutonValider = findViewById(R.id.boutonValider);
         boutonValider.setOnClickListener(this);
+        MainActivity.context = getApplicationContext();
     }
 
     @Override
@@ -50,17 +54,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        TextView nom                    = (TextView)findViewById(R.id.editTextNom);
-        TextView prenom                 = (TextView)findViewById(R.id.editTextPrenom);
-        String nomString                = nom.getText().toString();
-        String prenomString             = prenom.getText().toString();
-        boolean bLeChampNomEstVide      = nomString.length() == 0;
-        boolean bLeChampPrenomEstVide   = prenomString.length() == 0;
 
-        if ( !bLeChampNomEstVide && !bLeChampPrenomEstVide){
-            afficherNomEtPrenom(nomString, prenomString);
-        }else{
-            afficherUnMessageDAlerte();
+        int id = v.getId();
+
+        if (id== R.id.boutonValider) {
+            TextView nom = (TextView) findViewById(R.id.editTextNom);
+            TextView prenom = (TextView) findViewById(R.id.editTextPrenom);
+            String nomString = nom.getText().toString();
+            String prenomString = prenom.getText().toString();
+            boolean bLeChampNomEstVide = nomString.length() == 0;
+            boolean bLeChampPrenomEstVide = prenomString.length() == 0;
+
+            if (!bLeChampNomEstVide && !bLeChampPrenomEstVide) {
+                afficherNomEtPrenom(nomString, prenomString);
+            } else {
+                afficherUnMessageDAlerte();
+            }
         }
     }
 
@@ -75,5 +84,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         intent.putExtra(NOM, nomString);
         intent.putExtra(PRENOM, prenomString);
         startActivity(intent);
+    }
+
+    public static Context getContext(){
+        return MainActivity.context;
     }
 }
