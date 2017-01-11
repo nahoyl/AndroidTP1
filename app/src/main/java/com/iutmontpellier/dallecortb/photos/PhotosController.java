@@ -2,6 +2,7 @@ package com.iutmontpellier.dallecortb.photos;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.view.ViewGroup;
 
 import java.io.IOException;
 
@@ -16,12 +17,14 @@ public class PhotosController {
     private Context         _context;
     private PhotosLayout    _photoLayout;
 
-    public PhotosController(Context context, String nom, String prenom){
+    public PhotosController(Context context, ViewGroup parent, String nom, String prenom){
 
         _prenom         = prenom;
         _nom            = nom;
         _context        = context;
+
         _photoLayout    = new PhotosLayout(context, this);
+        parent.addView(_photoLayout);
 
         loadPhotoAssets();
     }
