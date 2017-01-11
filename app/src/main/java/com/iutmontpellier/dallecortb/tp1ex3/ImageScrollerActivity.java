@@ -2,11 +2,9 @@ package com.iutmontpellier.dallecortb.tp1ex3;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.RelativeLayout;
 
-import com.iut2016.photos.PhotosController;
-import com.iut2016.photos.PhotosLayout;
+import com.iutmontpellier.dallecortb.photos.PhotosController;
+
 
 public class ImageScrollerActivity extends Activity {
 
@@ -20,8 +18,7 @@ public class ImageScrollerActivity extends Activity {
         String prenom   = getIntent().getStringExtra("prenom");
 
         photosController   = new PhotosController(getApplicationContext(), nom, prenom);
-        View photosLayout  = new PhotosLayout(getApplicationContext(), photosController);
-        setContentView(photosLayout);
+
     }
 
 

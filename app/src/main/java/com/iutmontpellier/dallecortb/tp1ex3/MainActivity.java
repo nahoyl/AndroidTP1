@@ -2,16 +2,14 @@ package com.iutmontpellier.dallecortb.tp1ex3;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import java.util.EventListener;
 
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -19,7 +17,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     public static final String NOM = "nom";
     public static final String PRENOM = "prenom";
-    private static Context context;
+    private static      Context _context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +25,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         View boutonValider = findViewById(R.id.boutonValider);
         boutonValider.setOnClickListener(this);
-        MainActivity.context = getApplicationContext();
+        MainActivity._context = getApplicationContext();
     }
 
     @Override
@@ -58,12 +56,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
         int id = v.getId();
 
         if (id== R.id.boutonValider) {
-            TextView nom = (TextView) findViewById(R.id.editTextNom);
+            TextView nom    = (TextView) findViewById(R.id.editTextNom);
             TextView prenom = (TextView) findViewById(R.id.editTextPrenom);
-            String nomString = nom.getText().toString();
+
+            String nomString    = nom.getText().toString();
             String prenomString = prenom.getText().toString();
-            boolean bLeChampNomEstVide = nomString.length() == 0;
-            boolean bLeChampPrenomEstVide = prenomString.length() == 0;
+
+            boolean bLeChampNomEstVide      = TextUtils.isEmpty(nomString);
+            boolean bLeChampPrenomEstVide   = TextUtils.isEmpty(prenomString);
 
             if (!bLeChampNomEstVide && !bLeChampPrenomEstVide) {
                 afficherNomEtPrenom(nomString, prenomString);
@@ -87,6 +87,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     public static Context getContext(){
-        return MainActivity.context;
+        return MainActivity._context;
     }
 }
