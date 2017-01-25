@@ -30,24 +30,29 @@ public class PhotoView extends View
         _mat = new Matrix();
         _imageName = imageName;
 
-        centerPicture();
+
     }
 
-    private void centerPicture() {
-        int w, h;
-        h = getHeight();
-        w = getWidth();
+    private void centerPicture(Canvas canvas) {
+        float w, h;
+        h = getMeasuredHeight();
+        w = getMeasuredWidth();
 
         float dx, dy;
 
-        dx = (float)w/2.0f;
-        dy = (float)_bmp.getHeight()/2;
+        float imgHeight   = _bmp.getScaledHeight(canvas);
+        float imgWidth    = _bmp.getScaledWidth(canvas);
+
+        dx = w/2.0f - imgWidth /2.0f;
+        dy = h/2.0f - imgHeight/2.0f;
 
         _mat.setTranslate(dx, dy);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+        centerPicture(canvas);
 
         int w, h;
         h = getMeasuredHeight();
@@ -61,7 +66,6 @@ public class PhotoView extends View
 
 
         canvas.drawBitmap(_bmp, _mat, pt);
-
 
 
         canvas.drawText(_imageName, w/2, h - 12, pt);

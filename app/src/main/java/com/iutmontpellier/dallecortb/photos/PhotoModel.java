@@ -48,7 +48,7 @@ public class PhotoModel {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
             bitmap = BitmapFactory.decodeStream(inputStream, null, options);
-            options.inSampleSize = getSampleSizeToFitThumbSize(options, desiratedHeight);
+            options.inSampleSize = getSampleSizeToFitSize(options, desiratedHeight);
 
             options.inJustDecodeBounds = false;
             bitmap = BitmapFactory.decodeStream(inputStream, null, options);
@@ -62,7 +62,8 @@ public class PhotoModel {
         return bitmap;
     }
 
-    private int getSampleSizeToFitThumbSize(BitmapFactory.Options options, int desiratedHeight) {
+    private int getSampleSizeToFitSize(BitmapFactory.Options options, int desiratedHeight) {
+
         return options.outHeight / desiratedHeight;
     }
 
