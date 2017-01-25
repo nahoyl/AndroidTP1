@@ -6,11 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.RectF;
-import android.renderscript.Matrix3f;
 import android.view.View;
-
-import com.iutmontpellier.dallecortb.tp1ex3.R;
 
 import static com.iutmontpellier.dallecortb.tp1ex3.R.*;
 
@@ -19,57 +15,53 @@ import static com.iutmontpellier.dallecortb.tp1ex3.R.*;
  */
 public class PhotoView extends View
 {
-    private Bitmap _bmp;
-    private Matrix _mat;
+    private Bitmap _bitmap;
+    private Matrix _matrix;
     private String _imageName;
     private float _rotation = 0;
+    private Paint _paint;
 
     public PhotoView(Context context, Bitmap bmp, String imageName) {
         super(context);
-        _bmp = bmp;
-        _mat = new Matrix();
-        _imageName = imageName;
-
-
+        _bitmap     = bmp;
+        _matrix     = new Matrix();
+        _imageName  = imageName;
+        _paint      = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 
     private void centerPicture(Canvas canvas) {
-        float w, h;
-        h = getMeasuredHeight();
-        w = getMeasuredWidth();
 
-        float dx, dy;
+        float h = getMeasuredHeight();
+        float w = getMeasuredWidth();
 
-        float imgHeight   = _bmp.getScaledHeight(canvas);
-        float imgWidth    = _bmp.getScaledWidth(canvas);
+        float imgHeight   = _bitmap.getScaledHeight(canvas);
+        float imgWidth    = _bitmap.getScaledWidth(canvas);
 
-        dx = w/2.0f - imgWidth /2.0f;
-        dy = h/2.0f - imgHeight/2.0f;
+        float dx = w/2.0f - imgWidth /2.0f;
+        float dy = h/2.0f - imgHeight/2.0f;
 
-        _mat.setTranslate(dx, dy);
+        _matrix.setTranslate(dx, dy);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-
         centerPicture(canvas);
+        canvas.drawBitmap(_bitmap, _matrix, null);
+        drawBottomText(canvas);
 
-        int w, h;
-        h = getMeasuredHeight();
-        w = getMeasuredWidth();
-
-        Paint pt = new Paint(Paint.ANTI_ALIAS_FLAG);
-        pt.setTextSize(12);
-        pt.setColor(Color.RED);
-        pt.setTextAlign(Paint.Align.CENTER);
-
-
-
-        canvas.drawBitmap(_bmp, _mat, pt);
-
-
-        canvas.drawText(_imageName, w/2, h - 12, pt);
 //        invalidate();
+    }
+
+    private void drawBottomText(Canvas canvas) {
+
+        int viewWidth, viewHeight;
+        viewHeight = getMeasuredHeight();
+        viewWidth = getMeasuredWidth();
+        float textSize = getResources().getDimension(dimen.size12dp);
+        _paint.setTextSize(textSize);
+        _paint.setColor(Color.RED);
+        _paint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText(_imageName, viewWidth/2, viewHeight - textSize, _paint);
     }
 
 }
