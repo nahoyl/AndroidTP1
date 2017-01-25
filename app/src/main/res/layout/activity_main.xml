@@ -46,7 +46,8 @@
                 android:id="@+id/editTextNom"
                 android:background="#ffffffff"
                 android:autoText="true"
-                android:padding="5dp" />
+                android:padding="5dp"
+                android:hint="Votre nom" />
 
         </LinearLayout>
 
@@ -75,7 +76,11 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/editTextPrenom"
                 android:background="#ffffffff"
-                android:padding="5dp" />
+                android:padding="5dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:clickable="true"
+                android:hint="Votre prénom" />
         </LinearLayout>
 
         <TextView

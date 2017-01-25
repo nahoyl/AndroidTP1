@@ -36,7 +36,7 @@ public class PhotoModel {
 
         Log.i(TAG, "getBitmap()");
 
-        Bitmap bitmap;
+        Bitmap bitmap = null;
         Log.i(TAG, "getBitmap() - First generation of the bitmap...");
         AssetManager assetManager = MainActivity.getContext().getAssets();
 
@@ -45,18 +45,19 @@ public class PhotoModel {
         try {
             inputStream = assetManager.open(name);
             size = inputStream.available();
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            bitmap = BitmapFactory.decodeStream(inputStream, null, options);
+            options.inSampleSize = getSampleSizeToFitThumbSize(options, desiratedHeight);
+
+            options.inJustDecodeBounds = false;
+            bitmap = BitmapFactory.decodeStream(inputStream, null, options);
+            Log.i(TAG, "getBitmap() - First generation done !");
+            inputStream.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        bitmap = BitmapFactory.decodeStream(inputStream, null, options);
-        options.inSampleSize = getSampleSizeToFitThumbSize(options, desiratedHeight);
-
-        options.inJustDecodeBounds = false;
-        bitmap = BitmapFactory.decodeStream(inputStream, null, options);
-        Log.i(TAG, "getBitmap() - First generation done !");
 
         return bitmap;
     }

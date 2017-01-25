@@ -103,7 +103,7 @@ public class PhotoFullscreenActivity extends Activity {
 
         PhotoModel photo = new PhotoModel(photoName);
 
-        _photoView              = new PhotoView(this, photo.getFullscreenBitmap());
+        _photoView              = new PhotoView(this, photo.getFullscreenBitmap(), photo.getName());
         _photoGestureController = new PhotoGestureController(this, _photoView);
 
         ViewGroup viewGroup = (ViewGroup) findViewById(R.id.fullscreen_content);
