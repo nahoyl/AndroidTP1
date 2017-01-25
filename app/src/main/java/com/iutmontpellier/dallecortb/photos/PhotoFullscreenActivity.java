@@ -16,7 +16,7 @@ import com.iutmontpellier.dallecortb.tp1ex3.R;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class FullscreenPhotoActivity extends Activity {
+public class PhotoFullscreenActivity extends Activity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -85,6 +85,8 @@ public class FullscreenPhotoActivity extends Activity {
             return false;
         }
     };
+    private PhotoView _photoView;
+    private PhotoGestureController _photoGestureController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,10 +100,14 @@ public class FullscreenPhotoActivity extends Activity {
 
 
         String photoName = getIntent().getStringExtra("photoName");
-        ImageView imageView = new ImageView(this);
+
         PhotoModel photo = new PhotoModel(photoName);
-        imageView.setImageBitmap(photo.getFullscreenBitmap());
-        ((ViewGroup)mContentView).addView(imageView);
+
+        _photoView              = new PhotoView(this, photo.getFullscreenBitmap());
+        _photoGestureController = new PhotoGestureController(this, _photoView);
+
+        ViewGroup viewGroup = (ViewGroup) findViewById(R.id.fullscreen_content);
+        viewGroup.addView(_photoView);
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {

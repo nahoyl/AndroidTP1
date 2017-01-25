@@ -34,10 +34,10 @@ public class PhotoModel {
 
     public Bitmap getBitmap(int desiratedHeight){
 
-        Log.i(TAG, "getThumbBitmap()");
+        Log.i(TAG, "getBitmap()");
 
         Bitmap bitmap;
-        Log.i(TAG, "getThumbBitmap() - First generation of the bitmap...");
+        Log.i(TAG, "getBitmap() - First generation of the bitmap...");
         AssetManager assetManager = MainActivity.getContext().getAssets();
 
         InputStream inputStream = null;
@@ -56,7 +56,7 @@ public class PhotoModel {
 
         options.inJustDecodeBounds = false;
         bitmap = BitmapFactory.decodeStream(inputStream, null, options);
-        Log.i(TAG, "getThumbBitmap() - First generation done !");
+        Log.i(TAG, "getBitmap() - First generation done !");
 
         return bitmap;
     }

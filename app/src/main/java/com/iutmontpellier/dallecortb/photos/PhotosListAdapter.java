@@ -155,7 +155,7 @@ public class PhotosListAdapter extends BaseAdapter implements AdapterView.OnItem
     public void openInFullScreen(PhotoModel photoModel){
         String photoName = photoModel.getName();
         Log.i(TAG, "openInFullscreen(" + photoName + ")");
-        Intent intent = new Intent(_context, FullscreenPhotoActivity.class);
+        Intent intent = new Intent(_context, PhotoFullscreenActivity.class);
         intent.putExtra("photoName", photoName);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         _context.startActivity(intent);
