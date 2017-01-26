@@ -6,8 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.renderscript.Matrix3f;
+import android.util.Log;
 import android.view.View;
 
+import static android.content.ContentValues.TAG;
 import static com.iutmontpellier.dallecortb.tp1ex3.R.*;
 
 /**
@@ -15,11 +18,15 @@ import static com.iutmontpellier.dallecortb.tp1ex3.R.*;
  */
 public class PhotoView extends View
 {
+    private final static String TAG = "PhotoView";
     private Bitmap _bitmap;
     private Matrix _matrix;
     private String _imageName;
     private float _rotation = 0;
     private Paint _paint;
+    private float _focusX, _focusY;
+    private float _scaleX, _scaleY;
+    private boolean _firstDraw = true;
 
     public PhotoView(Context context, Bitmap bmp, String imageName) {
         super(context);
@@ -27,6 +34,8 @@ public class PhotoView extends View
         _matrix     = new Matrix();
         _imageName  = imageName;
         _paint      = new Paint(Paint.ANTI_ALIAS_FLAG);
+        _scaleX     = 1;
+        _scaleY     = 1;
     }
 
     private void centerPicture(Canvas canvas) {
@@ -45,11 +54,14 @@ public class PhotoView extends View
 
     @Override
     protected void onDraw(Canvas canvas) {
-        centerPicture(canvas);
+        Log.d(TAG, "onDraw...");
+
+        if (_firstDraw) {
+            centerPicture(canvas);
+            _firstDraw = false;
+        }
         canvas.drawBitmap(_bitmap, _matrix, null);
         drawBottomText(canvas);
-
-//        invalidate();
     }
 
     private void drawBottomText(Canvas canvas) {
@@ -64,4 +76,22 @@ public class PhotoView extends View
         canvas.drawText(_imageName, viewWidth/2, viewHeight - textSize, _paint);
     }
 
+    public void onScale(float scaleFactor) {
+
+        Log.d(TAG, "onScale - factor = " + scaleFactor + ", scaleX="+_scaleX+", scaleY="+_scaleY+", focuxX="+_focusX+", focusY="+_focusY);
+        _matrix.postScale(_scaleX * scaleFactor, _scaleY * scaleFactor, _focusX, _focusY);
+        invalidate();
+    }
+
+    public void onScaleBegin(float focusX, float focusY) {
+        _focusX = focusX;
+        _focusY = focusY;
+    }
+
+    public void onScroll(float distanceX, float distanceY) {
+
+        _matrix.postTranslate(- distanceX, - distanceY);
+
+        invalidate();
+    }
 }
